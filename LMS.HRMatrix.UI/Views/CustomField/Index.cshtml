@@ -1,0 +1,38 @@
+﻿<div style="margin: auto;">
+    <button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#AddCustomFieldModal">
+        CREATE Field
+    </button>
+</div>
+<div class="col col-md-6" style="align-content:center; margin-left: 20px; margin-top: 20px; border: chartreuse 2px solid; background: whitesmoke; width: auto;">
+    <div class="row">
+        <table class="table table" style="width: auto;">
+            <thead class="table header">
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Default Value</th>
+                    <th>Min Value</th>
+                    <th>Max Value</th>
+                    <th>EDIT / DELETE / ADD VALUES</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@x.Name</td>
+                        <td>@x.type</td>
+                        <td>@x.DefaultValue</td>
+                        <td>@x.MinValue</td>
+                        <td>@x.MaxValue</td>
+                        <td>
+                            <a class="btn btn-raised btn-info btn-sm" data-toggle="modal" data-target="#EditCustomFieldKeyModal" onclick="EditCustomField('@Url.Action("customfieldkeyOnJsonRequest", "CustomFieldKey", new { id = @x.CustomFieldKeyId })')"><span class="glyphicon glyphicon-pencil"> Edit</span></a>
+                            <a class="btn btn-danger btn-info btn-sm" onclick="DeleteCustomField('@Url.Action("CustomFieldDeleteOnJsonRequest", "CustomFieldKey", new { id = @x.CustomFieldKeyId })')"><span class="glyphicon glyphicon-trash"> Delete</span></a>
+                            <a class="btn btn-success btn-info btn-sm" data-toggle="modal" data-target="#AddFieldKeyModal" onclick="AddValuesToField('@x.CustomFieldKeyId')"><span class="glyphicon glyphicon-edit"> Add</span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

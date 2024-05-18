@@ -1,0 +1,206 @@
+﻿@model IEnumerable<LMS.HRMatrix.Model.CustomFieldKey>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/CustomFieldsKey/CustomFieldKey.js"></script>
+<h2>Add Custom Field</h2>
+<div style="margin: auto;">
+    <button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#AddCustomFieldModal">
+        ADD NEW Field
+    </button>
+</div>
+<div class="col col-md-6" style="align-content:center; margin-left: 20px; margin-top: 20px; border: chartreuse 2px solid; background: whitesmoke; width: auto;">
+    <div class="row">
+        <table class="table table" style="width: auto;">
+            <thead class="table header">
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default Value</th>
+                <th>Min Value</th>
+                <th>Max Value</th>
+                <th>EDIT / DELETE / ADD VALUES</th>
+            </tr> 
+            </thead>
+            <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@x.Name</td>
+                    <td>@x.type</td>
+                    <td>@x.DefaultValue</td>
+                    <td>@x.MinValue</td>
+                    <td>@x.MaxValue</td>
+                    <td>
+                        <a class="btn btn-raised btn-info btn-sm" data-toggle="modal" data-target="#EditCustomFieldKeyModal" onclick="EditCustomField('@Url.Action("customfieldkeyOnJsonRequest", "CustomFieldKey", new { id = @x.CustomFieldKeyId })')"><span class="glyphicon glyphicon-pencil"> Edit</span></a>
+                        <a class="btn btn-danger btn-info btn-sm" onclick="DeleteCustomField('@Url.Action("CustomFieldDeleteOnJsonRequest", "CustomFieldKey", new { id = @x.CustomFieldKeyId })')"><span class="glyphicon glyphicon-trash"> Delete</span></a>
+                        <a class="btn btn-success btn-info btn-sm" data-toggle="modal" data-target="#AddFieldKeyModal" onclick="AddValuesToField('@x.CustomFieldKeyId')"><span class="glyphicon glyphicon-edit"> Add</span></a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="AddFieldKeyModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form" id="CustomFiledKeyFormAddValue">
+                    <input type="text" id="CustomFieldKeyId" class="form-control border-primary" name="CustomFieldKeyId" value="" style="visibility: hidden">
+                    <div class="form-body">
+                        <h4 class="form-section"><i class="ft-info"></i>Custom Field Key Values</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Value</label>
+                                    <input type="text" id="Value" name="Value" class="form-control border-primary">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" data-dismiss="modal" class="btn btn-raised btn-warning mr-1">
+                                <i class="ft-x"></i> Cancel
+                            </button>
+                            <button type="button" class="btn btn-raised btn-primary" id="btnAddCustomFieldValue" name="btnAddCustomFieldValue" onclick="btnAddCustomFieldValue;">
+                                <i class=" fa fa-check-square-o">
+                                </i> Save
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="EditCustomFieldKeyModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form" id="CustomFiledKeyFormEdit">
+                    <input type="text" id="CustomFiledKeyId1" class="form-control border-primary" name="CustomFieldKeyId" value="" style="visibility: hidden">
+                    <div class="form-body">
+                        <h4 class="form-section"><i class="ft-info"></i>Custom Field Key</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Name</label>
+                                    <input type="text" id="Name1" name="Name" class="form-control border-primary">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput1">Type</label>
+                                    <input type="text" id="type1" class="form-control border-primary" name="type" value="">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Default Value</label>
+                                    <input type="text" id="DefaultValue1" class="form-control border-primary" name="DefaultValue" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Min Value</label>
+                                    <input type="text" id="MinValue1" class="form-control border-primary" name="MinValue">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput1">Max Value</label>
+                                    <input type="text" id="MaxValue1" class="form-control border-primary" name="MaxValue" value="">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" data-dismiss="modal" class="btn btn-raised btn-warning mr-1">
+                                <i class="ft-x"></i> Cancel
+                            </button>
+                            <button type="button" class="btn btn-raised btn-primary" id="btnAddCustomField1" name="btnAddCustomField1" onclick="btnAddCustomField1;">
+                                <i class=" fa fa-check-square-o">
+                                </i> Save
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="AddCustomFieldModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form" id="btnAddCustomFieldForm">
+                  
+                    <div class="form-body">
+                        <h4 class="form-section"><i class="ft-info"></i>Field Info</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput1">Name</label>
+                                    <input type="text" id="Name" name="Name" class="form-control border-primary"  value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Type</label>
+                                    <input type="text" id="type" name="type" class="form-control border-primary"  value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">DefaultValue</label>
+                                    <input type="text" id="DefaultValue" name="DefaultValue" class="form-control border-primary" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput1">Min Value</label>
+                                    <input type="text" id="MinValue" name="MinValue" class="form-control border-primary"  value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Max Value</label>
+                                    <input type="text" id="MaxValue" name="MaxValue" class="form-control border-primary"  value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" data-dismiss="modal" class="btn btn-raised btn-warning mr-1">
+                                <i class="ft-x"></i> Cancel
+                            </button>
+                            <button type="button" class="btn btn-raised btn-primary" id="btnAddCustomField" name="btnAddCustomField" onclick="btnAddCustomField;">
+                                <i class=" fa fa-check-square-o">
+                                </i> Save
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,5 @@
+E:\LMS.HRMatrix3.0_Dev\trunk\LMS.HRMatrix\LMS.HRMatrix.Utils\bin\Debug\LMS.HRMatrix.Utils.dll
+E:\LMS.HRMatrix3.0_Dev\trunk\LMS.HRMatrix\LMS.HRMatrix.Utils\bin\Debug\LMS.HRMatrix.Utils.pdb
+E:\LMS.HRMatrix3.0_Dev\trunk\LMS.HRMatrix\LMS.HRMatrix.Utils\obj\Debug\LMS.HRMatrix.Utils.csproj.CoreCompileInputs.cache
+E:\LMS.HRMatrix3.0_Dev\trunk\LMS.HRMatrix\LMS.HRMatrix.Utils\obj\Debug\LMS.HRMatrix.Utils.dll
+E:\LMS.HRMatrix3.0_Dev\trunk\LMS.HRMatrix\LMS.HRMatrix.Utils\obj\Debug\LMS.HRMatrix.Utils.pdb

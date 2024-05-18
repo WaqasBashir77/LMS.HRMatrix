@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
+<script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
+<script src="~/Content/FormBuilder/FormBuilder.js"></script>
+<style>
+    body {
+        padding: 0;
+        margin: 10px 0;
+        background: #f2f2f2 url('http://formbuilder.readthedocs.io/en/latest/img/noise.png');
+    }
+
+    .saveDataWrap {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="saveDataWrap">
+    <button id="saveData" class="btn btn-default"type="button">External Save Button</button>
+    <div class="setDataWrap">
+        <button id="getJSON" class="btn btn-success" type="button">Get Form</button>
+    </div>
+</div>
+<div style="width: 80%; align-content: center; margin-left: 100px;">
+    <div id="fb-editor"></div>
+</div>
+<form id="fb-render"class="form-control col col-lg-4" style="height: auto; width: 50%; align-content: center; margin: auto; background: white; margin-left: 100px;"></form>

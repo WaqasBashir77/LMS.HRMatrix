@@ -1,0 +1,293 @@
+﻿@model IEnumerable<LMS.HRMatrix.Model.Employee>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Content/CutomFields/AjaxControls.js"></script>
+<script src="~/Content/CutomFields/sweetalert.min.js"></script>
+@*<script src="~/Content/CutomFields/sweet-alerts.js"></script>*@
+<div style="margin-left: 5%;">
+    <div style="margin: 5px;">
+        <a type="button" class="btn  btn-primary" href="@Url.Action("AddEmployee","Employee")">
+            ADD NEW EMPLOYEE
+        </a>
+    </div><div style="margin: auto; position: relative;">
+        <a type="button" class="btn  btn-primary" href="@Url.Action("Index","CustomFieldKey")">
+            Custom Fields
+        </a>
+    </div>
+</div>
+<div class="col col-md-6" style="align-content:center; margin-left: 20px; margin-top: 20px; border: chartreuse 2px solid; background: whitesmoke; width: auto;">
+    <div class="row">
+        <table class="table table" style="width: auto;">
+            <thead class="table header">
+                <tr>
+
+                    <th>Organization ID</th>
+                    <th>Onboarding ID</th>
+                    <th>Salutation</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Nick Name</th>
+                    <th>Display Name</th>
+                    <th>Person Number</th>
+                    <th>Working Email</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr>
+
+                        <td>@x.OrganizationId</td>
+                        <td>@x.OnboardingId</td>
+                        <td>@x.Salutation</td>
+                        <td>@x.FirstName</td>
+                        <td>@x.MiddleName</td>
+                        <td>@x.LastName</td>
+                        <td>@x.NickName</td>
+                        <td>@x.DisplayName</td>
+                        <td>@x.PersonNumber</td>
+                        <td>@x.WorkEmail</td>
+                        <td>
+                            <a class="btn btn-raised btn-info btn-sm" data-toggle="modal" data-target="#EditEmployeeModal" onclick="EditEmployeeid('@Url.Action("EmployeeOnJsonRequest", "Employee", new { id = @x.Id })')"><span class="glyphicon glyphicon-pencil"> Edit</span></a>
+                            <a class="btn btn-danger btn-info btn-sm" onclick="DeleteEmployeeid('@Url.Action("EmployeeDeleteOnJsonRequest", "Employee", new { id = @x.Id })')"><span class="glyphicon glyphicon-trash"> Delete</span></a>
+
+                        </td>
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="EditEmployeeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <form class="form" id="myForm">
+                    <input type="text" id="Id" class="form-control border-primary" name="Id" value="" style="visibility: hidden">
+                    <div class="form-body">
+                        <h4 class="form-section"><i class="ft-info"></i>Employee Info</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput1">Organization ID</label>
+                                    <input type="number" id="OrganizationID" class="form-control border-primary" name="OrganizationID" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Onboarding ID</label>
+                                    <input type="number" id="OnboardingID" class="form-control border-primary" name="OnboardingID" value="">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Salutation</label>
+                                    <input type="text" id="Salutation" class="form-control border-primary" name="Salutation">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput1">First Name</label>
+                                    <input type="text" id="FirstName" class="form-control border-primary" name="FirstName" value="">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Middle Name</label>
+                                    <input type="text" id="MiddleName" class="form-control border-primary" name="MiddleName" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Last Name</label>
+                                    <input type="text" id="LastName" class="form-control border-primary" name="Last Name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput1">Nick Name</label>
+                                    <input type="text" id="NickName" class="form-control border-primary" name="NickName" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userinput2">Display Name</label>
+                                    <input type="text" id="DisplayName" class="form-control border-primary" name="DisplayName">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput2">Person Number</label>
+                                        <input type="text" id="PersonNumber" class="form-control border-primary" name="PersonNumber">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput2">Working Email</label>
+                                        <input type="email" id="WorkingEmail" class="form-control border-primary" name="WorkingEmail">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions right">
+                            <button type="button" data-dismiss="modal" class="btn btn-raised btn-warning mr-1">
+                                <i class="ft-x"></i> Cancel
+                            </button>
+                            <button type="button" class="btn btn-raised btn-primary" id="btnEmployeeUpdate1" name="btn1EmployeeUpdate" onclick="PostEmailList();">
+                                <i class=" fa fa-check-square-o">
+                                </i> Save
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*-------------------Employee Form--------------------*@
+@*<div id="AddEmployeeModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form" id="AddEmployeeModel" action="\Employee\CustomFieldSubmitWithModel" method="post">
+                        <div class="form-body">
+                            <h4 class="form-section"><i class="ft-info"></i>Employee Info</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput1">Organization ID</label>
+                                        <input type="number" id="OrganizationID1" name="OrganizationID" class="form-control border-primary" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput2">Onboarding ID</label>
+                                        <input type="number" id="OnboardingID1" name="OnboardingID" class="form-control border-primary" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput2">Salutation</label>
+                                        <input type="text" id="Salutation1" name="Salutation" class="form-control border-primary">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput1">First Name</label>
+                                        <input type="text" id="FirstName1" name="FirstName" class="form-control border-primary" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput2">Middle Name</label>
+                                        <input type="text" id="MiddleName1" name="MiddleName" class="form-control border-primary" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput2">Last Name</label>
+                                        <input type="text" id="LastName1" name="LastName" class="form-control border-primary">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput1">Nick Name</label>
+                                        <input type="text" id="NickName1" name="NickName" class="form-control border-primary" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="userinput2">Display Name</label>
+                                        <input type="text" id="DisplayName1" name="DisplayName" class="form-control border-primary">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userinput2">Person Number</label>
+                                            <input type="text" id="PersonNumber1" name="PersonNumber" class="form-control border-primary">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userinput2">Working Email</label>
+                                            <input type="email" id="WorkingEmail1" name="WorkEmail" class="form-control border-primary">
+                                        </div>
+                                    </div>
+                                </div> <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userinput2">Custom Field</label>
+                                            <input type="text" id="CustomField1" name="CustomField[CustomField1]" class="form-control border-primary">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userinput2">Custom Field</label>
+                                            <input type="email" id="CustomField2" name="CustomField[CustomField2]" class="form-control border-primary">
+                                        </div>
+                                    </div>
+                                </div> <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userinput2">Custom Field</label>
+                                            <input type="text" id="CustomField3" name="CustomField[CustomField3]" class="form-control border-primary">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="userinput2">Custom Field</label>
+                                            <input type="email" id="CustomField4" name="CustomField[CustomField4]" class="form-control border-primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions right">
+                                    <button type="button" data-dismiss="modal" class="btn btn-raised btn-warning mr-1">
+                                        <i class="ft-x"></i> Cancel
+                                    </button>
+                                    <button type="submit" class="btn btn-raised btn-primary" id="btnAddEmployee" name="btnAddEmployee">
+                                        <i class=" fa fa-check-square-o">
+                                        </i> Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>*@

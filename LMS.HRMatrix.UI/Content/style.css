@@ -1,0 +1,35 @@
+﻿input[type="date"], input.date {
+    min-width: 96px;
+    width: 115px;
+}
+input[type="number"], input.number, input[type="time"], input.time, input.duration {
+    min-width: 0;
+    text-align: right;
+    width: 64px;
+}
+.picker__holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.picker__frame {
+    margin-bottom: 0;
+    position: static;
+    // padding is a graceful fallback for non-flex browsers padding-top: 45px;
+    padding-bottom: 45px;
+}
+.table-xxs > thead > tr > th, .table-xxs > tbody > tr > th, .table-xxs > tfoot > tr > th, .table-xxs > thead > tr > td, .table-xxs > tbody > tr > td, .table-xxs > tfoot > tr > td {
+    padding: 1px 5px;
+}
+
+.k-grid table td, .k-grid table th {
+    border-width: 0;
+}
+.k-icon, .k-i-delete {
+    display: none;
+}
+
+.k-content {
+    border-collapse: inherit;
+}

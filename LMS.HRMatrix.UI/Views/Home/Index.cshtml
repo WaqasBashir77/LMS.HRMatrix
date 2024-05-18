@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row">
+    <div class="col-md-4">
+
+        <p>
+            Choose  Upload File To Server.
+        </p>
+        <div class="row">
+            <div class="col-12">
+                <div class="content-header">
+                    <span>Courses</span>
+                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addCourseModal"><i class="ft-plus"></i>Add Course</button>
+                </div>
+            </div>
+        </div>
+        @ViewBag.error
+    </div>
+    @*<div class="col-md-6">
+            @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post , new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="fileupload" accept=".pptx,.ppt,.doc,.docx" class="btn btn-primary col-md-6"/>
+                <p>
+
+                </p>
+                <input type="submit" value="Upload" class="btn btn-block col-md-6" id="btnid" />
+            }
+
+
+
+        </div>
+    *@
+
+</div>
